@@ -3,9 +3,38 @@
 A runnable reference implementation of a three-agent expense-reporting
 pipeline: extract receipts, check policy, decide and pay.
 
+## How it works
+
+```mermaid
+flowchart TD
+    U["Employee submits via mobile web<br/>receipt photos + purpose"] --> EX
+
+    EX{{"Extractor<br/>mock default · optional Claude vision"}} --> V{"Agent 1 · validation gate<br/>confidence · totals reconcile · category"}
+    V -->|fails| INFO["NEEDS_MORE_INFO<br/>employee asked to resubmit"]
+    V -->|passes| DS[("Regional data store<br/>residency enforced")]
+    DS -->|"EU data into US store"| BLOCK["BLOCKED<br/>DataResidencyError"]
+
+    DS --> A2["Agent 2<br/>total receipts + policy check"]
+    A2 -->|policy violation| REJ["REJECTED<br/>error message to employee"]
+    A2 -->|within policy| RD["Agent 3<br/>redact PII + pseudonymize"]
+
+    RD --> DEC{"over 500<br/>or high-risk category?"}
+    DEC -->|no| PAY
+    DEC -->|"over 500"| H1["Human review<br/>1 approver"]
+    DEC -->|"high-risk / very large"| H2["Dual-department review<br/>2 approvers, 2 departments"]
+
+    H1 -->|approve| PAY
+    H1 -->|reject| REJ
+    H2 -->|both approve| PAY
+    H2 -->|either rejects| REJ
+
+    PAY[["Payment service<br/>reimburse, mock"]] --> OK["APPROVED · paid"]
 ```
-submission -> Agent 1 (extract + validate) -> Agent 2 (total + policy) -> Agent 3 (decide + human review + pay)
-```
+
+The colored gates above map directly to the project answers: the **Agent 1
+validation gate** is the Step 2 bug fix, **residency enforced** is Step 4,
+**human review** is Step 3, and **dual-department review** is Step 5. See
+[`docs/design.md`](docs/design.md) for the full code mapping.
 
 ## Who this is for
 
