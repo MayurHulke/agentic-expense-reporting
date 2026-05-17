@@ -1,0 +1,6 @@
+{
+  "report_id": "RPT-EU",
+  "employee_id": "emp-200",
+  "purpose": "Taxi for EU-based sales rep",
+  "receipts": ["taxi_clear"]
+}

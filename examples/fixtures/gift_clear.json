@@ -1,0 +1,8 @@
+{
+  "vendor": "GiftCo",
+  "date": "2026-05-05",
+  "category": "gift",
+  "line_items": [{"description": "Team gift cards", "amount": 200.00}],
+  "stated_total": 200.00,
+  "image_quality": "clear"
+}

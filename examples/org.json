@@ -1,0 +1,11 @@
+{
+  "employees": {
+    "emp-100": {"name": "Dana Lee", "role": "Engineer", "department": "Engineering", "region": "US"},
+    "emp-200": {"name": "Mateo Ruiz", "role": "Sales Rep", "department": "Sales", "region": "EU"}
+  },
+  "approvers": {
+    "Engineering": {"id": "mgr-eng", "name": "Priya Shah", "department": "Engineering"},
+    "Sales": {"id": "mgr-sales", "name": "Tom Becker", "department": "Sales"},
+    "Finance": {"id": "mgr-fin", "name": "Aiko Tanaka", "department": "Finance"}
+  }
+}

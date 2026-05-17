@@ -1,0 +1,6 @@
+{
+  "report_id": "RPT-SMALL",
+  "employee_id": "emp-100",
+  "purpose": "Taxi to client meeting, card ending 4111 1111 1111 1234",
+  "receipts": ["taxi_clear"]
+}

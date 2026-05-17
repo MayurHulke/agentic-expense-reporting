@@ -1,0 +1,8 @@
+{
+  "vendor": "Sky Air",
+  "date": "2026-05-03",
+  "category": "transport",
+  "line_items": [{"description": "Round-trip flight", "amount": 900.00}],
+  "stated_total": 900.00,
+  "image_quality": "clear"
+}

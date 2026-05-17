@@ -1,0 +1,9 @@
+.DS_Store
+~$*.docx
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+src/*.egg-info/

@@ -1,0 +1,16 @@
+{
+  "currency": "USD",
+  "human_review_threshold": 500,
+  "dual_dept_threshold": 2000,
+  "extraction_confidence_threshold": 0.75,
+  "allowed_categories": ["meals", "lodging", "transport", "supplies", "gift", "entertainment"],
+  "high_risk_categories": ["gift", "entertainment"],
+  "per_category_caps": {
+    "meals": 150,
+    "lodging": 400,
+    "transport": 1200,
+    "supplies": 600,
+    "gift": 250,
+    "entertainment": 500
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "vendor": "Grand Stay",
+  "date": "2026-05-04",
+  "category": "lodging",
+  "line_items": [{"description": "Room, 1 night", "amount": 300.00}],
+  "stated_total": 300.00,
+  "image_quality": "clear"
+}

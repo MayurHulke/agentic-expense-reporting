@@ -1,0 +1,6 @@
+{
+  "report_id": "RPT-LARGE",
+  "employee_id": "emp-100",
+  "purpose": "Conference travel: flight and hotel",
+  "receipts": ["flight_clear", "hotel_clear"]
+}

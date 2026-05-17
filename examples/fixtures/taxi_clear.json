@@ -1,0 +1,8 @@
+{
+  "vendor": "City Cab",
+  "date": "2026-05-02",
+  "category": "transport",
+  "line_items": [{"description": "Taxi fare", "amount": 38.50}],
+  "stated_total": 38.50,
+  "image_quality": "clear"
+}

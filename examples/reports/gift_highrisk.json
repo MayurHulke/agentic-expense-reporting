@@ -1,0 +1,6 @@
+{
+  "report_id": "RPT-GIFT",
+  "employee_id": "emp-100",
+  "purpose": "Team gift cards for project milestone",
+  "receipts": ["gift_clear"]
+}
