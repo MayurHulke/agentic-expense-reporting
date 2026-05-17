@@ -17,6 +17,26 @@ boundary, is exposed as a real MCP server and consumed through an MCP client:
 | Selection | `extractors/__init__.py` | `EXPENSE_EXTRACTOR=mcp` opts in; mock stays the zero-setup default |
 | Proof | `tests/test_mcp_extractor.py` | Spawns the server as a subprocess and runs the full pipeline through it |
 
+### The MCP seam
+
+```mermaid
+flowchart LR
+    A1["Agent 1<br/>(pipeline)"] --> P{{"ReceiptExtractor<br/>Protocol"}}
+    P -->|"default, zero setup"| M["MockExtractor<br/>in-process call"]
+    P -->|"EXPENSE_EXTRACTOR=mcp"| C["MCPExtractor<br/>MCP client"]
+    C -->|"stdio JSON-RPC<br/>call_tool: extract_receipt"| S["FastMCP server<br/>expense-receipt-extractor"]
+    S --> BK{"server backend<br/>(swappable)"}
+    BK -->|default| MB["MockExtractor"]
+    BK -->|"ANTHROPIC_API_KEY"| CL["Claude vision<br/>extractor"]
+    M --> R["ExtractionResult<br/>confidence + fields"]
+    BK --> R
+    R --> GATE["Agent 1 validation gate<br/>(Step 2 fix)"]
+```
+
+The decision flow (the [main system diagram](../README.md#how-it-works)) is
+unchanged: MCP only swaps how the extractor capability is reached, never what
+the pipeline decides. The validation gate runs regardless of transport.
+
 Run the pipeline over MCP:
 
 ```bash
