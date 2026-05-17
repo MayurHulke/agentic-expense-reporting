@@ -135,3 +135,11 @@ Three challenges solved with one agentic system:
 3. **Cost-Watch Agent** tracks labor, gas, kitchen-rental, and ingredient prices across all markets on a schedule and raises an alert when a rolling average rises faster than a set threshold. *Tools:* price-feed APIs, time-series store, anomaly detection, notification tool.
 
 **Orchestration:** an orchestrator agent triggers ranking, spawns per-market research sub-agents in parallel, and schedules the cost-watch agent on a recurring cron, with a human-in-the-loop checkpoint before any outbound emails or financial commitments.
+
+---
+
+## Implementation and Frontier Architecture
+
+Every answer above is backed by a runnable reference implementation in this repository, not just described. The three-agent pipeline performs the Step 2 validation gate, the Step 3 human-review gate, the Step 4 PII redaction and data-residency enforcement, and the Step 5 dual-department approval, each covered by tests that run in CI.
+
+The system is also built on 2026 frontier agentic patterns. The receipt-extraction capability is exposed as a working Model Context Protocol (MCP) server and consumed through an MCP client behind the same interface, so the agentic flow is identical whether extraction is an in-process call or a standard protocol tool call. The agents delegate in sequence (Agent-to-Agent), while their access to tools and data is MCP, which is the current consensus split. The strongest privacy benefit comes from the code-execution-with-MCP pattern, where sensitive receipt data stays in the execution environment and never enters the model context, a stronger guarantee than redaction alone. The full mapping of each answer to modern techniques (durable workflows, reflection / LLM-as-judge, model cascades, evals built before failures, OAuth at the payment boundary) is in `docs/mcp.md` and `docs/design.md`.
