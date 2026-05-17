@@ -36,6 +36,29 @@ validation gate** is the Step 2 bug fix, **residency enforced** is Step 4,
 **human review** is Step 3, and **dual-department review** is Step 5. See
 [`docs/design.md`](docs/design.md) for the full code mapping.
 
+## MCP architecture
+
+The decision flow above is unchanged whether receipt extraction is an
+in-process call or a Model Context Protocol tool call. MCP only swaps the
+transport behind the extractor interface:
+
+```mermaid
+flowchart LR
+    A1["Agent 1<br/>(pipeline)"] --> P{{"ReceiptExtractor<br/>Protocol"}}
+    P -->|"default, zero setup"| M["MockExtractor<br/>in-process call"]
+    P -->|"EXPENSE_EXTRACTOR=mcp"| C["MCPExtractor<br/>MCP client"]
+    C -->|"stdio JSON-RPC<br/>call_tool: extract_receipt"| S["FastMCP server<br/>expense-receipt-extractor"]
+    S --> BK{"server backend<br/>(swappable)"}
+    BK -->|default| MB["MockExtractor"]
+    BK -->|"ANTHROPIC_API_KEY"| CL["Claude vision<br/>extractor"]
+    M --> R["ExtractionResult<br/>confidence + fields"]
+    BK --> R
+    R --> GATE["Agent 1 validation gate<br/>(Step 2 fix)"]
+```
+
+Full rationale, the MCP vs A2A split, and the 2026 frontier-methods map are in
+[`docs/mcp.md`](docs/mcp.md).
+
 ## Who this is for
 
 - **Developers** exploring a clean, dependency-free example of a multi-agent
