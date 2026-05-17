@@ -1,11 +1,11 @@
 # Notice
 
-This repository is a coursework submission by Mayur Hulke for the project
-*"Analyze and Extend an Agentic System."*
+This project was originally created by Mayur Hulke as a submission for the
+course project *"Analyze and Extend an Agentic System."* It is released under
+the [MIT License](LICENSE) and contributions are welcome.
 
-It is shared for evaluation and portfolio review only and is not released under
-an open-source license. Please do not copy or submit this work as your own;
-doing so may violate the course's academic-integrity policy.
+Academic-integrity note: if you are taking the same course, please do not copy
+this work and submit it as your own.
 
 `docs/project-template_-agentic-expense-reporting-system.docx` is the
 course-provided template, included unmodified for reference, and remains the

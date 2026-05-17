@@ -83,4 +83,19 @@ export ANTHROPIC_API_KEY=...
 | `answers/responses.md` | Written system analysis. |
 | `docs/design.md` | How the code maps to each design decision. |
 
-See [`NOTICE.md`](NOTICE.md) for usage terms.
+## Contributing
+
+Contributions are welcome. Bug fixes, new example scenarios, additional
+extractor adapters, and docs improvements are all appreciated.
+
+1. Fork and create a branch.
+2. Make your change with a test where it makes sense.
+3. Run `make check` (ruff + pytest) and ensure it passes.
+4. Open a pull request describing what and why.
+
+Questions and ideas are also welcome via issues.
+
+## License
+
+MIT, see [LICENSE](LICENSE). Note the academic-integrity statement in
+[`NOTICE.md`](NOTICE.md) if you are taking the same course.
