@@ -2,7 +2,7 @@
 VENV := .venv
 PY := $(VENV)/bin/python
 
-.PHONY: help setup demo lint test check clean
+.PHONY: help setup demo mcp-demo lint test check clean
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
@@ -11,6 +11,9 @@ help: ## Show this help
 setup: ## Create venv and install the package + dev tools
 	python3 -m venv $(VENV)
 	$(VENV)/bin/pip install -q -e ".[dev]"
+
+mcp-demo: ## Run a scenario with extraction served over MCP
+	EXPENSE_EXTRACTOR=mcp $(PY) -m expense_pipeline run examples/reports/gift_highrisk.json
 
 demo: ## Run every example scenario end to end
 	@$(PY) -m expense_pipeline run examples/reports/small_trip.json

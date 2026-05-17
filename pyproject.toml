@@ -11,10 +11,12 @@ dependencies = []
 
 [project.optional-dependencies]
 real = ["anthropic>=0.40"]
-dev = ["pytest==8.3.4", "ruff==0.9.2"]
+mcp = ["mcp>=1.10,<2"]
+dev = ["pytest==8.3.4", "ruff==0.9.2", "mcp>=1.10,<2"]
 
 [project.scripts]
 expense-pipeline = "expense_pipeline.cli:main"
+expense-mcp-server = "expense_pipeline.mcp_server:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

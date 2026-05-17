@@ -1,6 +1,12 @@
-"""Extractor selection: prefer the real Claude adapter, fall back to mock."""
+"""Extractor selection.
+
+Precedence: explicit MCP opt-in (EXPENSE_EXTRACTOR=mcp) -> real Claude adapter
+if usable -> deterministic mock. The mock keeps the default path zero-setup;
+MCP and Claude are opt-in like any production integration.
+"""
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 from expense_pipeline.extractors.base import ReceiptExtractor
@@ -10,7 +16,12 @@ __all__ = ["ReceiptExtractor", "MockExtractor", "get_extractor"]
 
 
 def get_extractor(prefer_real: bool = True) -> ReceiptExtractor:
-    """Return a real Claude extractor if usable, otherwise the mock one."""
+    """Return the configured extractor (see module docstring for precedence)."""
+    if os.environ.get("EXPENSE_EXTRACTOR") == "mcp":
+        from expense_pipeline.extractors.mcp_client import MCPExtractor
+
+        return MCPExtractor()
+
     if prefer_real:
         from expense_pipeline.extractors import claude
 

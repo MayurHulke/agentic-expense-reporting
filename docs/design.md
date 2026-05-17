@@ -43,6 +43,9 @@ default, an optional Claude vision adapter when `ANTHROPIC_API_KEY` is set.
   approver slot in without touching the agents.
 - **Privacy is enforced, not advisory.** A cross-region write raises
   `DataResidencyError` and stops the pipeline, mirroring a hard GDPR control.
+- **MCP is a real transport, not a slide.** The extractor Protocol is also
+  served over the Model Context Protocol; the same pipeline runs unchanged with
+  `EXPENSE_EXTRACTOR=mcp`. See [`mcp.md`](mcp.md) for the frontier-methods map.
 
 ## Try it
 

@@ -45,7 +45,9 @@ validation gate** is the Step 2 bug fix, **residency enforced** is Step 4,
 
 ## Requirements
 
-Python 3.11+. No API keys, no cloud, no third-party runtime dependencies.
+Python 3.11+. The default path needs no API keys, no cloud, and no third-party
+runtime dependencies. The Claude (`[real]`) and MCP (`[mcp]`) integrations are
+opt-in extras.
 
 ## Use it
 
@@ -73,6 +75,18 @@ pip install -e ".[real]"
 export ANTHROPIC_API_KEY=...
 ```
 
+Run the pipeline with receipt extraction served over the **Model Context
+Protocol** instead of an in-process call (same agentic flow, standard
+tool transport):
+
+```bash
+pip install -e ".[mcp]"
+EXPENSE_EXTRACTOR=mcp python -m expense_pipeline run examples/reports/gift_highrisk.json
+```
+
+See [`docs/mcp.md`](docs/mcp.md) for the MCP integration and how the design
+maps to 2026 frontier agentic patterns.
+
 ## Layout
 
 | Path | Purpose |
@@ -82,6 +96,7 @@ export ANTHROPIC_API_KEY=...
 | `tests/` | Behavior tests, one file per capability. |
 | `answers/responses.md` | Written system analysis. |
 | `docs/design.md` | How the code maps to each design decision. |
+| `docs/mcp.md` | MCP integration and the 2026 frontier-methods map. |
 
 ## Contributing
 
